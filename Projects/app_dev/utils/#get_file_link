@@ -1,0 +1,11 @@
+from .auth import create_service
+
+async def get_file_link(file_id):
+    service = await create_service()
+
+    try:
+        service.permissions().create(fileId=file_id, body={'type': 'anyone', 'role': 'reader'}).execute()
+        link = f'https://drive.google.com/file/d/{file_id}/view?usp=sharing'
+        return link
+    except Exception as e:
+        print(f'Ошибка {e}')

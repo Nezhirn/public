@@ -1,0 +1,10 @@
+from .list_files import list_files
+from .delete_file import delete_file
+
+async def clean_all():
+    items_id = await list_files()
+    try:
+        for item in items_id:
+            await delete_file(item)
+    except Exception as e:
+        print(f"Ошибка {e}")

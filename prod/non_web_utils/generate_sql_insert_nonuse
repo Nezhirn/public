@@ -1,0 +1,34 @@
+def generate_sql_insert(inn_list, name_list, start_id, output_path):
+    sql_values = []
+    name_user = ""
+    date_add = "TIMESTAMP '2025-02-06 00:00:00.000000'"
+    comment = ""
+    srgu_service_passport_name = ""
+    
+    for i, (inn, name) in enumerate(zip(inn_list, name_list)):
+        id_value = f"market_{start_id + i}"
+        sql_values.append(f"({id_value}, '{inn}', {srgu_service_passport_name}, '{name}', {date_add}, {comment}, false)")
+
+    sql_body = ",\n".join(sql_values)
+
+    final_sql = f"""
+INSERT INTO public.portal_stop_list (id, inn, "srguServicePassportName", name, date_add, comment, is_deleted)
+VALUES
+{sql_body};
+"""
+
+    # Сохранение в файл
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(final_sql)
+
+# Пример использования
+inn_list = [
+
+]
+name_list = [
+    'Name1',
+    'Name2'
+]
+start_id = 1697
+output_path = '/home/andrew/insert.sql'
+generate_sql_insert(inn_list, name_list, start_id, output_path)

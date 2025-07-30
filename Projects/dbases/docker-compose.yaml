@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: base_postgres
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    volumes:
+      - /home/andrew/dbase/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 156483
+      POSTGRES_DB: base_db
+
+volumes:
+  postgres_data:
+    driver: local

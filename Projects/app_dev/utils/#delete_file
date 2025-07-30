@@ -1,0 +1,10 @@
+from .auth import create_service
+
+async def delete_file(file_id):
+    service = await create_service()
+
+    try:
+        service.files().delete(fileId=file_id).execute()
+        print(f"Файл с ID {file_id} удалён.")
+    except Exception as e:
+        print(f"Ошибка при удалении файла: {e}")

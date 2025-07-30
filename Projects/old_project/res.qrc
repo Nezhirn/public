@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="image">
+    <file>Project/images/purple_gradient_intense.png</file>
+  </qresource>
+</RCC>

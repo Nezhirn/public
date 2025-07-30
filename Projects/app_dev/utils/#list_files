@@ -1,0 +1,22 @@
+from .auth import create_service
+
+async def list_files(page_size=20):
+    service = await create_service()
+
+    try:
+        results = service.files().list(pageSize=page_size, fields="nextPageToken, files(id, name)").execute()
+
+        items = results.get('files', [])
+        items_id = []
+
+        if not items:
+            print('Файлы не найдены.')
+        else:
+            print('Найденные файлы:')
+            for item in items:
+                items_id.append(item['id'])
+                #print(f"{item['name']} (ID: {item['id']})")
+        return items_id
+        
+    except Exception as e:
+        print(f'Ошибка {e}')
